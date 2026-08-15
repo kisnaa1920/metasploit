@@ -200,6 +200,29 @@ I learned that Metasploit options like RHOST aren't automatically filled in, eve
 
 ---
 
+# LHOST Set
+![LHOST Set](screenshots/msf_set_LHOST0.7.png)
+<p align = "center">msf_set_LHOST0.7.png</p>
+
+# Commands
+```bash
+set LHOST 192.168.0.1
+```
+# Parameters
+- `set` - Metasploit's command to configure an option for the currently loaded module.
+- `LHOST` - Stands for Local Host, this tells the payload which IP address to connect back to once the exploit succeeds, in this case my own Kali machine's IP.
+- `192.168.0.1` - My attacker machine's IP address on the same network as the target.
+
+# Observation
+- Metasploit accepted the value and set LHOST accordingly. The prompt remained exploit(unix/ftp/vsftpd_234_backdoor), confirming the module now has both RHOST (target) and LHOST (my machine) configured, ready for the exploit to run.
+
+# Why Is This Important:
+- RHOST tells the exploit where to attack, but LHOST is just as critical for payloads that need a connection back to the attacker, like the meterpreter_reverse_tcp payload that was auto-configured earlier. Without a correct LHOST, even if the exploit succeeds on the target, I'd never actually get a shell back, the target wouldn't know where to send the connection.
+
+# What I Learned:
+I learned the difference between RHOST and LHOST clearly through this step, RHOST is always the victim, LHOST is always me. This also showed me that some exploits (especially reverse-shell based ones) need the attacker to be reachable by the target, not just the other way around, which matters for network setup in real scenarios too.
+
+---
 
 
 
