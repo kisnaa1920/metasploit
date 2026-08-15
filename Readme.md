@@ -153,6 +153,7 @@ search vsftpd
 # What I Learned:
 Metasploit's search results give more than just a list of names, the rank and disclosure date help decide which module actually fits the goal. I also learned to read the module type carefully, auxiliary versus exploit. Auxiliary modules like the DoS one don't give access, while exploit modules like vsftpd_234_backdoor are built to actually compromise the target.
 
+---
 
 
 
