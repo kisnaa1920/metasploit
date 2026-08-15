@@ -224,6 +224,10 @@ I learned the difference between RHOST and LHOST clearly through this step, RHOS
 
 ---
 
+# Show Options
+![Show Options](screenshots/msf_show_options0.8.png))
+<p align="center">msf_show_options0.8.png)</p>
+
 
 
 
