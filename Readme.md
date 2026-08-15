@@ -121,7 +121,7 @@ msfconsole -q
 ### Observation
 - The console launched and dropped me into the msf> prompt, ready to accept commands. It skipped the usual startup banner since I used the -q flag.
 
-### What Is This Important:
+### Why Is This Important:
 - This is the entry point into the actual exploitation phase. Everything before this (network scan, version scan, vulnerability identification) was recon — this is where I move from gathering information to using a tool to act on that information. Metasploit is ehat lets me actually  select and run the exploit against vsftpd 2.3.4.
 
 ### What I Learned:
@@ -129,6 +129,35 @@ msfconsole -q
 
 
 ---
+
+# Search Vsftpd
+![Msf_Search_Vsftpd](screenshots/msf_search_vsftpd0.4.png)
+<p align = "center" >msf_search_vsftpd0.4.png</p>
+
+### Commands
+```bash
+search vsftpd
+```
+### Parameters
+- `search` : Metasploit's built-in command to look through its exploit/auxiliary/payload database for a keyword match.
+- `vsftpd` : The keyword, searches for any module related to vsftpd, the FTP service found during scanning.
+
+# Observation
+- The search returned two matching modules. The first one was auxiliary/dos/ftp/vsftpd_232, disclosed on 2011-02-03, ranked normal, described as a VSFTPD 2.3.2 and Earlier STAT Denial of Service module. The second one was exploit/unix/ftp/vsftpd_234_backdoor, disclosed on 2011-07-03, ranked excellent, described as VSFTPD 2.3.4 Backdoor Command Execution.
+
+- The second module was exactly what I needed, it directly matches the vsftpd 2.3.4 version identified during the scan, and it's ranked excellent, meaning Metasploit considers it a highly reliable exploit. Metasploit even suggested the exact command to load it, use exploit/unix/ftp/vsftpd_234_backdoor.
+
+# Why Is This Important:
+- This step confirmed that a ready-made, tested exploit module exists for the exact vulnerability I identified earlier. The first result, vsftpd_232, was a denial-of-service module, not useful for gaining access, so it was important to pick the right module and not just the first one that showed up. The excellent rank also mattered, since it told me this exploit is stable and unlikely to crash the target.
+
+# What I Learned:
+Metasploit's search results give more than just a list of names, the rank and disclosure date help decide which module actually fits the goal. I also learned to read the module type carefully, auxiliary versus exploit. Auxiliary modules like the DoS one don't give access, while exploit modules like vsftpd_234_backdoor are built to actually compromise the target.
+
+
+
+
+
+
 
  
 
