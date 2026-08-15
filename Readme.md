@@ -61,7 +61,7 @@ nmap -sV 192.168.0.128
   on each (e.g., vsftpd 2.3.4, Apache 2.2.8).
 - `192.168.0.128` : The confirmed target IP from the previous host
   discovery step.
-- Default scan covers the top 1000 common ports --- full port scan wasn't needed since the target already showed 23 open ports here.
+- Default scan covers the top 1000 common ports — full port scan wasn't needed since the target already showed 23 open ports here.
 
 ### Observation 
 - The scan found the host up with 23 open port out of the 1000 scanned (977 closed).
@@ -116,13 +116,13 @@ msfconsole -q
 ```
 ### Parameters
 - `msfconsole` : Launches the Metasploit Framework's interactive command-line console, which gives access to its full database of exploits, payloads, and auxiliary modules.
-- `-q` : Quite mode -- skips the ASCII art banner and startup tips, so the console loads faster and cleaner.
+- `-q` : Quite mode — skips the ASCII art banner and startup tips, so the console loads faster and cleaner.
 
 ### Observation
 - The console launched and dropped me into the msf> prompt, ready to accept commands. It skipped the usual startup banner since I used the -q flag.
 
 ### What Is This Important:
-- This is the entry point into the actual exploitation phase. Everything before this (network scan, version scan, vulnerability identification) was recon -- this is where I move from gathering information to using a tool to act on that information. Metasploit is ehat lets me actually  select and run the exploit against vsftpd 2.3.4.
+- This is the entry point into the actual exploitation phase. Everything before this (network scan, version scan, vulnerability identification) was recon — this is where I move from gathering information to using a tool to act on that information. Metasploit is ehat lets me actually  select and run the exploit against vsftpd 2.3.4.
 
 ### What I Learned:
 - I learned that Metasploit runs as its own interactive shell rather than individual one-off commands — once inside msfconsole, you work entirely within its own command set (search, use, set, run, etc.) instead of regular bash commands. Using -q also showed me that even small flags can make repeated workflows faster by skipping unnecessary output.
