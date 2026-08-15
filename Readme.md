@@ -155,6 +155,29 @@ Metasploit's search results give more than just a list of names, the rank and di
 
 ---
 
+# Msf Use Module
+![Msf_use_module](screenshots/msf_use_module0.5.png)
+<p align="Center">msf_use_module0.5.png</p>
+
+# Commands
+```bash
+use 1
+```
+# Parameters
+- `use`- Metasploit's command to load a specific module into the current session, making it the active module you're working with.
+- `1`- The index number of the module from the search results list, instead of typing the full path exploit/unix/ftp/vsftpd_234_backdoor, I used its shortcut number 1 shown in the search output.
+
+# Observation
+Metasploit loaded the module and automatically configured a default payload, cmd/linux/http/x86/meterpreter_reverse_tcp. The prompt also changed from msf > to msf exploit(unix/ftp/vsftpd_234_backdoor) >, confirming the module is now active and I'm working inside it.
+
+# Why Is This Important:
+- Loading the module is what actually puts me in position to configure and run the exploit. The prompt change matters too, it's a visual confirmation that every command I type from here on will apply specifically to this exploit, not to Metasploit in general. I also noticed Metasploit picked a default payload on its own, which told me it already has a sensible starting configuration before I even set anything manually.
+
+# What I Learned:
+- I learned that using the index number (1) instead of the full module path is a quicker way to load a module once you've already seen it in a search result. I also learned that Metasploit auto-selects a default payload for exploits, which means I need to check what's already configured with options or show payloads before assuming I have to set one manually.
+
+---
+
 
 
 
