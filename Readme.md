@@ -16,7 +16,7 @@ nmap -sn -n 192.168.0.0/24
   possible addresses in that network range.
 
 ### Observation
-The scan completed in 4.37 seconds and found 3 hosts up out of 256
+- The scan completed in 4.37 seconds and found 3 hosts up out of 256
 addresses scanned:
  
 | IP Address    | MAC Address        | Likely Role                  |
@@ -29,8 +29,8 @@ Both `.128` and `.254` show VMware MAC address prefixes, confirming they
 are virtual machines on the host-only/NAT network. I identified
 `192.168.0.128` as the Metasploitable2 target based on this.
 
-### Why Is This Important?
-The purpose of running this command was to identify which machines are
+### Why Is This Important:
+- The purpose of running this command was to identify which machines are
 actually alive on the network before doing anything else. Scanning a
 /24 subnet means 256 possible addresses — without this step, I would be
 guessing at IPs or wasting time scanning dead/non-existent hosts. This
@@ -40,7 +40,7 @@ to just 3 real, reachable machines, and the MAC address vendor info
 to my lab, versus the physical router.
 
 ### What I Learned
-Reconnaissance should always start broad and narrow down gradually. A
+- Reconnaissance should always start broad and narrow down gradually. A
 lightweight ping sweep is the right first move because it's fast (under 5
 seconds here) and doesn't waste time probing ports on dead hosts. I also
 learned that MAC address vendor identification (like the "VMware" tag) is
@@ -85,8 +85,8 @@ nmap -sV 192.168.0.128
 | 5900 | vnc     | VNC (protocol 3.3) |
 | 6000 | X11     | (access denied) |
 
-### Why Is This Important?
-The purpose of this scan was to find out exactly what services are running
+### Why Is This Important:
+- The purpose of this scan was to find out exactly what services are running
 on the target and their exact versions. Version numbers are critical —
 they're what let you match a service to a known, publicly documented
 vulnerability. Without this step, I wouldn't have known that vsftpd
@@ -96,7 +96,7 @@ just how many potential entry points a misconfigured or intentionally
 vulnerable system can expose.
 
 ### What I Learned
-I learned that service version detection is the bridge between recon and
+- I learned that service version detection is the bridge between recon and
 exploitation — it turns "a port is open" into "this port is exploitable."
 I also learned that a single machine can expose an unusually large number
 of services (like Telnet, rsh, and even a service literally named
@@ -105,6 +105,31 @@ biggest giveaway when hunting for a way in. This scan gave me a full map
 of the attack surface before I committed to exploiting any one service.
  
 ---
+
+# Metasploit Console
+![Metasploit Console](screenshots/msfconsole_launch0.3.png)
+<p align="center">msfconsole_launch0.3.png</p>
+
+### Commands
+```bash
+msfconsole -q
+```
+### Parameters
+- `msfconsole` : Launches the Metasploit Framework's interactive command-line console, which gives access to its full database of exploits, payloads, and auxiliary modules.
+- `-q` : Quite mode -- skips the ASCII art banner and startup tips, so the console loads faster and cleaner.
+
+### Observation
+- The console launched and dropped me into the msf> prompt, ready to accept commands. It skipped the usual startup banner since I used the -q flag.
+
+### What Is This Important:
+- This is the entry point into the actual exploitation phase. Everything before this (network scan, version scan, vulnerability identification) was recon -- this is where I move from gathering information to using a tool to act on that information. Metasploit is ehat lets me actually  select and run the exploit against vsftpd 2.3.4.
+
+### What I Learned:
+- I learned that Metasploit runs as its own interactive shell rather than individual one-off commands — once inside msfconsole, you work entirely within its own command set (search, use, set, run, etc.) instead of regular bash commands. Using -q also showed me that even small flags can make repeated workflows faster by skipping unnecessary output.
+
+
+---
+
  
 
 
