@@ -198,6 +198,8 @@ Every exploit module needs to know exactly which machine to attack, without sett
 # What I Learned:
 I learned that Metasploit options like RHOST aren't automatically filled in, even after loading the right module, you still have to manually configure the target based on what you found during recon. This also showed me how the earlier scanning steps directly feed into the exploitation phase, the IP address wasn't just a random detail, it was information I needed later.
 
+---
+
 
 
 
