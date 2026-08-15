@@ -228,6 +228,25 @@ I learned the difference between RHOST and LHOST clearly through this step, RHOS
 ![Show Options](screenshots/msf_show_options0.8.png)
 <p align="center">msf_show_options0.8.png)</p>
 
+# Commands
+```bash
+Show Options
+```
+# Parameters
+- `show` - Metasploit's command to display information, in this case configured options for the current module.
+- `options` - Tells show to display the module's configurable settings, both exploit options and payload options, along with their current values.
+# Observation
+- The output listed two sections. Under Module options, RHOSTS was set to 192.168.0.128 and RPORT was 21, both marked as required and confirmed correctly configured. Under Payload options for cmd/linux/http/x86/meterpreter_reverse_tcp, several settings appeared including FETCH_COMMAND set to CURL, FETCH_DELETE set to false, and FETCH_SRVPORT set to 8080, among others related to how the payload gets delivered to the target.
+
+# Why Is This Important:
+- Before running the exploit, it's important to double check that every required option actually has a value, especially RHOSTS and RPORT, since a missing or wrong value would cause the exploit to fail or hit the wrong target entirely. This step let me confirm both RHOST and LHOST were correctly applied from the previous two commands, and also showed me settings I hadn't manually touched, like FETCH_COMMAND, which Metasploit had already configured with sensible defaults.
+
+# What I learned:
+- I learned that show options is a good habit to run right before launching an exploit, it's a final sanity check that catches mistakes early instead of finding out an option was wrong after the exploit fails. I also learned that payloads have their own separate set of options beyond just LHOST/LPORT, in this case settings related to how the payload binary gets fetched and delivered onto the target machine.
+
+---
+
+# Check Vulnerability
 
 
 
