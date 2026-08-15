@@ -177,7 +177,26 @@ Metasploit loaded the module and automatically configured a default payload, cmd
 - I learned that using the index number (1) instead of the full module path is a quicker way to load a module once you've already seen it in a search result. I also learned that Metasploit auto-selects a default payload for exploits, which means I need to check what's already configured with options or show payloads before assuming I have to set one manually.
 
 ---
+# RHOST Set
+![RHOST Set](screenshots/msf_set_RHOST0.6.png)
+<p align ="center">msf_set_RHOST0.6.png</p>
 
+# Commands
+```bash
+set RHOST 192.168.0.128
+```
+
+# Parameters
+- `set`-Metasploit's command to configure an option/variable for the currently loaded module.
+- `RHOST`- Stands for Remote Host, this is the option that tells the exploit which IP address to attack.
+- `192.168.0.128`- The target's IP address, confirmed earlier during the host discovery and version scan steps.
+
+# Observation
+- Metasploit confirmed the value was set by returning RHOST => 192.168.0.128. The prompt stayed the same, exploit(unix/ftp/vsftpd_234_backdoor), showing the module is still active and now has its target configured.
+# Why Is This Important:
+Every exploit module needs to know exactly which machine to attack, without setting RHOST, the exploit has no destination and can't run. This step directly connects everything from the recon phase, network scan and version scan, to the actual attack, the IP I found earlier is now plugged into the tool that will exploit it.
+# What I Learned:
+I learned that Metasploit options like RHOST aren't automatically filled in, even after loading the right module, you still have to manually configure the target based on what you found during recon. This also showed me how the earlier scanning steps directly feed into the exploitation phase, the IP address wasn't just a random detail, it was information I needed later.
 
 
 
