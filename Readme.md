@@ -266,9 +266,28 @@ check
 ### What I Learned
 - I learned that check is a low-risk way to validate an exploit before committing to running it, especially useful in real assessments where you want to avoid crashing a service or causing unintended side effects. I also learned that Metasploit's check result is based on version banners, it's a strong indicator but not an absolute guarantee, actual exploitation confirms it fully, which is why the next step is to run the exploit itself.
 
+---
+# Msf_run_exploit-success
+![Msf Run Exploit Success](screenshots/msf_run_exploit_success0.10.png)
+<p align= "center">msf_run_exploit_success0.10png</p>
 
+# Commands
+```bash
+run
+```
+# Parameters
+- `run` - Metasploit's command to actually execute the currently loaded and configured exploit module against the target, launching the attack with all the options set in the previous steps (RHOST, LHOST, RPORT, payload).
 
- 
+# Obseration
+- Metasploit started a reverse TCP handler on 192.168.0.1:4444, listening on my own machine for the target to connect back. It then automatically ran a check first, confirming again that the vsftpd 2.3.4 banner was detected and the backdoor may be present. Right after that, two key lines appeared: "Backdoor has been spawned!" and "Meterpreter session 1 opened (192.168.0.1:4444 → 192.168.0.128:47468)". The prompt then changed from msf exploit(...) to meterpreter >, confirming I now had an active session on the target machine.
+
+# Why Is This Important
+- This is the actual moment of compromise, everything before this, network scanning, version detection, module selection, and setting options, was preparation for this single step. The reverse TCP handler was critical because it's what allowed the target to connect back to my machine once the backdoor was triggered, without it being started first, the exploit could technically succeed on the target side but I'd never receive the shell. Getting a Meterpreter session specifically (rather than just a basic shell) matters too, since Meterpreter gives a much more powerful, feature-rich interface for post-exploitation compared to a plain command shell.
+
+# What I Learned:
+- I learned how the reverse-shell workflow actually plays out end to end, the attacker sets up a listener first (the handler), then the exploit triggers something on the target that connects back to that listener. I also learned that Metasploit automatically re-runs its check before executing the exploit as a safety step, and that a successful exploit is clearly marked with a "session opened" message and a change in the prompt itself, meterpreter > is the unmistakable sign that I've gone from attacker outside the system to having a live foothold inside it.
+
+---
 
 
   
