@@ -247,6 +247,24 @@ Show Options
 ---
 
 # Check Vulnerability
+![Msf Check Vulnerability](screenshots/msf_check_vulnerability0.9.png)
+<p align = "center">msf_check_vulnerability0.9.png</p>
+# Commands
+```bash
+check
+```
+# Parameters
+
+- `check` - A built-in Metasploit command that tests whether the target is actually vulnerable to the loaded exploit module, without fully executing the attack. It sends a probe based on the configured RHOSTS/RPORT and reports back the result.
+
+### Observation 
+- Metasploit connected to 192.168.0.128:21 and reported two findings. First, the FTP banner hinted the service is vulnerable, showing "220 (vsFTPd 2.3.4)" as the version string. Second, it confirmed with a "[+]" flag that the target appears to be vulnerable, stating the vsftpd 2.3.4 banner was detected and the backdoor may be present.
+
+### What Is This Important:
+- Running check before the actual exploit is a safe way to confirm the target is genuinely vulnerable, without triggering the full attack yet. This step gave me confidence that the exploit is likely to succeed, based on Metasploit's own verification, rather than just assuming it will work because the version number matched during the earlier nmap scan.
+
+### What I Learned
+- I learned that check is a low-risk way to validate an exploit before committing to running it, especially useful in real assessments where you want to avoid crashing a service or causing unintended side effects. I also learned that Metasploit's check result is based on version banners, it's a strong indicator but not an absolute guarantee, actual exploitation confirms it fully, which is why the next step is to run the exploit itself.
 
 
 
