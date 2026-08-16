@@ -147,7 +147,7 @@ search vsftpd
 
 - The second module was exactly what I needed, it directly matches the vsftpd 2.3.4 version identified during the scan, and it's ranked excellent, meaning Metasploit considers it a highly reliable exploit. Metasploit even suggested the exact command to load it, use exploit/unix/ftp/vsftpd_234_backdoor.
 
-# Why Is This Important:
+### Why Is This Important:
 - This step confirmed that a ready-made, tested exploit module exists for the exact vulnerability I identified earlier. The first result, vsftpd_232, was a denial-of-service module, not useful for gaining access, so it was important to pick the right module and not just the first one that showed up. The excellent rank also mattered, since it told me this exploit is stable and unlikely to crash the target.
 
 # What I Learned:
