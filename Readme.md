@@ -142,7 +142,7 @@ search vsftpd
 - `search` : Metasploit's built-in command to look through its exploit/auxiliary/payload database for a keyword match.
 - `vsftpd` : The keyword, searches for any module related to vsftpd, the FTP service found during scanning.
 
-# Observation
+### Observation
 - The search returned two matching modules. The first one was auxiliary/dos/ftp/vsftpd_232, disclosed on 2011-02-03, ranked normal, described as a VSFTPD 2.3.2 and Earlier STAT Denial of Service module. The second one was exploit/unix/ftp/vsftpd_234_backdoor, disclosed on 2011-07-03, ranked excellent, described as VSFTPD 2.3.4 Backdoor Command Execution.
 
 - The second module was exactly what I needed, it directly matches the vsftpd 2.3.4 version identified during the scan, and it's ranked excellent, meaning Metasploit considers it a highly reliable exploit. Metasploit even suggested the exact command to load it, use exploit/unix/ftp/vsftpd_234_backdoor.
