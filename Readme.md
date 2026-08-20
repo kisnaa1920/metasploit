@@ -150,7 +150,7 @@ search vsftpd
 ### Why Is This Important:
 - This step confirmed that a ready-made, tested exploit module exists for the exact vulnerability I identified earlier. The first result, vsftpd_232, was a denial-of-service module, not useful for gaining access, so it was important to pick the right module and not just the first one that showed up. The excellent rank also mattered, since it told me this exploit is stable and unlikely to crash the target.
 
-# What I Learned:
+### What I Learned:
 Metasploit's search results give more than just a list of names, the rank and disclosure date help decide which module actually fits the goal. I also learned to read the module type carefully, auxiliary versus exploit. Auxiliary modules like the DoS one don't give access, while exploit modules like vsftpd_234_backdoor are built to actually compromise the target.
 
 ---
